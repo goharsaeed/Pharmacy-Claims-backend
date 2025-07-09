@@ -1,0 +1,17 @@
+package rules
+
+import com.example.pharmacy.domain.Claim;
+
+rule "High cost claim should be ERROR"
+when
+    $c : Claim(claimCost > 1000)
+then
+    $c.setStatus("ERROR");
+end
+
+rule "Normal claim should be PROCESSED"
+when
+    $c : Claim(claimCost <= 1000)
+then
+    $c.setStatus("PROCESSED");
+end 
